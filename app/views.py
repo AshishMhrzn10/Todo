@@ -24,3 +24,14 @@ def add_todo(request):
         return render(request, 'app/home.html')
         
     return render(request, 'app/home.html')
+
+
+@login_required(login_url='/accounts/login/')
+def delete_todo(request, post_id=None):
+    post = Todo.objects.get(id=post_id)
+    post.delete()
+    messages.error(request, f"Deleted node")
+    return redirect('home')
+
+
+

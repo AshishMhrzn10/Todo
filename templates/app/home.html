@@ -19,13 +19,25 @@
 
   <h1 class="my-4">Your todos</h1>
 
-  <div>
-    <ul>
-      {% for list in lists %}
-      <li>{{list}}</li>
-      {% endfor %}
-    </ul>
-  </div>
+<div class="container">
+  <div class="row">
+    {% for list in lists %}
+    <div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Note {{forloop.counter}}:</h5>
+        <p class="card-text">{{list}}</p>
+        <form method="post">
+          {% csrf_token %}
+          <a href="{% url 'delete' list.id %}" class="btn btn-danger">Delete</a>
+        </form>
+      </div>
+    </div>
+    </div>
+      {% if forloop.counter|divisibleby:3 %}
+            </div><div class="row my-2">
+      {% endif %}
+    {% endfor %}
 </div>
 
 {% endblock content %}
