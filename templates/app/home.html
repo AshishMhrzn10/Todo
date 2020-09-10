@@ -26,9 +26,10 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Note {{forloop.counter}}:</h5>
-        <p class="card-text">{{list}}</p>
+        <p class="card-text">{{list.description}}</p>
         <form method="post">
           {% csrf_token %}
+          <a href="{% url 'update' list.id %}" class="btn btn-primary">Update</a>
           <a href="{% url 'delete' list.id %}" class="btn btn-danger">Delete</a>
         </form>
       </div>

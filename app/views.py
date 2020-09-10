@@ -30,8 +30,28 @@ def add_todo(request):
 def delete_todo(request, post_id=None):
     post = Todo.objects.get(id=post_id)
     post.delete()
-    messages.error(request, f"Deleted node")
+    messages.error(request, "Deleted node")
     return redirect('home')
+
+
+@login_required(login_url='/accounts/login/')
+def update_todo(request, post_id=None):
+    post = Todo.objects.get(id=post_id)
+    print(post) 
+    if request.method == "POST":
+        print("fdsfdsf")
+        print(post)
+        updated_text = request.POST['update']
+        print(updated_text)
+        post.description = updated_text
+        post.save()
+        messages.warning(request, "Updated text")
+        return redirect('home')
+    else:
+        # return redirect('home')
+        pass
+    
+    return render(request, 'app/update.html',{'post':post} )
 
 
 

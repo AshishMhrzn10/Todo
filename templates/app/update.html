@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %} 
+ <div class="container">
+  <form class="col-md-6 mx-auto mt-5" method="post" action="{% url 'update' post.id%}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="update">Note:</label>
+      <input
+        type="text"
+        name="update"
+        class="form-control"
+        aria-describedby="emailHelp"
+        value="{{post.description}}"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+{% endblock content %}
